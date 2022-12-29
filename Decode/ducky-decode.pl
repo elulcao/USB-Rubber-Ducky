@@ -60,13 +60,13 @@ if (exists $opts{f}){
 }
 
 open(FILE, "<$file") or die "Can't open ".$file." file for reading!\n\n $0 -h for help!\n\n";
-binmode(FILE); 
+binmode(FILE);
 
 @buffer=[500];
-my ($buf, $data, $n); 
-while (($n = read FILE, $data, 2) != 0) { 
+my ($buf, $data, $n);
+while (($n = read FILE, $data, 2) != 0) {
 	push(@buffer,$data);
-} 
+}
 close(FILE);
 
 for($i=1;$i<@buffer;$i++){
@@ -108,7 +108,7 @@ for($i=1;$i<@buffer;$i++){
 			}
 
     		}
-	}                
+	}
 	$hex=~s/^0082/\nDELAY 40\n/g;
 	$hex=~s/^0023/\nDELAY 50\n/g;
         $hex=~s/^00b4/\nDELAY 75\n/g;
@@ -122,7 +122,7 @@ for($i=1;$i<@buffer;$i++){
 	$hex=~ s/^9300/\nCAPSLOCK\n/g;
 	$hex=~ s/^1220/\$/g;
 	$hex=~ s/^1320/\|/g;
-	$hex=~ s/^e220/\+/g; 
+	$hex=~ s/^e220/\+/g;
 	$hex=~ s/^d200/\-/g;
 	$hex=~ s/^9900/\`/g;
 	$hex=~ s/^4300/\'/g;
@@ -139,7 +139,7 @@ for($i=1;$i<@buffer;$i++){
 	$hex=~ s/^e200/\=/g;
 	$hex=~ s/^6300/\,/g;
 	$hex=~ s/^2220/\%/g;
-        $hex=~ s/^8320/\?/g; 
+        $hex=~ s/^8320/\?/g;
         $hex=~ s/^4620/\|/g;
 	$hex=~ s/^d220/_/g;
         $hex=~ s/^902e/\nALT F\n/g;
@@ -167,7 +167,7 @@ for($i=1;$i<@buffer;$i++){
 	$hex=~ s/^2500/\nUPARROW\n/g;
 	$hex=~ s/^7400/\nSCROLLLOCK\n/g;
         $hex=~ s/^3320/:/g;
-	$hex=~ s/^3300/\;/g; 
+	$hex=~ s/^3300/\;/g;
 	$hex=~ s/^6320/\</g;
 	$hex=~ s/^7320/\>/g;
         $hex=~ s/^7300/\./g;
@@ -186,7 +186,7 @@ for($i=1;$i<@buffer;$i++){
         $hex=~ s/^9020/F/g;
         $hex=~ s/^a000/g/g;
         $hex=~ s/^a020/G/g;
-        $hex=~ s/^b000/h/g;        
+        $hex=~ s/^b000/h/g;
 	$hex=~ s/^b020/H/g;
         $hex=~ s/^c000/i/g;
         $hex=~ s/^c020/I/g;
@@ -254,7 +254,7 @@ for($i=1;$i<@buffer;$i++){
 	    #$hex=~ s/^1300/\\/g;
 	    $hex=~ s/^f120/\"/g;
 	    $hex=~ s/^4320/\@/g;
-	    $hex=~ s/^0220/\£/g;
+	    $hex=~ s/^0220/\ï¿½/g;
 	    $hex=~ s/^4600/\\/g;
 	    $hex=~ s/^5320/\~/g;
 	    $hex=~ s/^5300/\#/g;

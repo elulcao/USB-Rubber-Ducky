@@ -1,6 +1,6 @@
 // File:         Encoder.java
 // Created:      8/10/2011
-// Original Author:Jason Appelbaum Jason@Hak5.org 
+// Original Author:Jason Appelbaum Jason@Hak5.org
 // Author:       Dnucna
 // Modified:     8/18/2012
 // Modified:	 11/9/2013 midnitesnake "added COMMAND-OPTION"
@@ -33,7 +33,7 @@ public class Encoder {
         private static Properties layoutProps = new Properties();
         private static String version = "2.6.3";
         private static Boolean debug=false;
-    
+
         public static void main(String[] args) {
                 String helpStr = "Hak5 Duck Encoder "+version+"\n\n"
                         + "Usage: duckencode -i [file ..]\t\t\tencode specified file\n"
@@ -55,7 +55,7 @@ public class Encoder {
 			+ "   SHIFT [key name] (ex: SHIFT DEL)\n"
                         + "   STRING [any character of your layout]\n"
                         + "   REPEAT [Number] (Repeat last instruction N times)\n"
-                        + "   [key name] (anything in the keyboard.properties)";                        
+                        + "   [key name] (anything in the keyboard.properties)";
 
         String inputFile = null;
         String outputFile = null;
@@ -88,9 +88,9 @@ public class Encoder {
                         break;
                 }
         }
-            
+
         System.out.println("Hak5 Duck Encoder "+version+"\n");
-        
+
         if (inputFile != null) {
                 String scriptStr = null;
 
@@ -108,7 +108,7 @@ public class Encoder {
                         } catch (BadLocationException e) {
                                 System.out.println("Error with input file!");
                         }
-                    
+
                 } else {
                         DataInputStream in = null;
                         try {
@@ -128,13 +128,13 @@ public class Encoder {
                         }
                 }
                 loadProperties((layoutFile == null) ? "us" : layoutFile);
-                
+
                 encodeToFile(scriptStr, (outputFile == null) ? "inject.bin"
                                 : outputFile);
                 }
-            
+
         }
-        
+
         private static void loadProperties (String lang){
                 InputStream in;
                 ClassLoader loader = ClassLoader.getSystemClassLoader ();
@@ -151,7 +151,7 @@ public class Encoder {
                 } catch (IOException e) {
                         System.out.println("Error with keyboard.properties!");
                 }
-                        
+
                 try {
                         in = loader.getResourceAsStream(lang + ".properties");
                         if(in != null){
@@ -193,7 +193,7 @@ public class Encoder {
 				if (instructions[i].equals("\n"))
 					continue;
                                String[] instruction = instructions[i].split(" ", 2);
-                                
+
                                 if(i>0){
                                 		last_instruction=instructions[i-1].split(" ", 2);
                                 		last_instruction[0].trim();
@@ -260,7 +260,7 @@ public class Encoder {
                                         } else {
                                                 file.add(strToByte(keyboardProps.getProperty("KEY_LEFT_CTRL")));
                                                 file.add((byte) 0x00);
-                                        }                               
+                                        }
                                 	} else if (instruction[0].equals("ALT")) {
                                         if (instruction.length != 1){
                                                 file.add(strInstrToByte(instruction[1]));
@@ -384,7 +384,7 @@ public class Encoder {
                 } catch (Exception e) {
                         System.out.print("Failed to write hex file!");
                 }
-            
+
         }
 
         private static void addBytes(List<Byte> file, byte[] byteTab){
@@ -394,7 +394,7 @@ public class Encoder {
                         file.add((byte) 0x00);
                 }
         }
-        
+
         private static byte[] charToBytes (char c){
                 return codeToBytes(charToCode(c));
         }
@@ -409,7 +409,7 @@ public class Encoder {
             }
                 return code;
         }
-        
+
         private static byte[] codeToBytes (String str){
                 if(layoutProps.getProperty(str) != null){
                         String keys[] = layoutProps.getProperty(str).split(",");
@@ -440,7 +440,7 @@ public class Encoder {
                         return (byte)Integer.parseInt(str);
                 }
         }
-        
+
         private static byte strInstrToByte(String instruction){
                 instruction = instruction.trim();
                 if(keyboardProps.getProperty("KEY_"+instruction)!=null)
